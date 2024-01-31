@@ -1,0 +1,15 @@
+.item {
+    display: flex;
+    justify-content: space-around;
+}
+
+.line-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    text-decoration: none;
+    color: black;
+}
