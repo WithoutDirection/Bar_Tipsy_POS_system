@@ -1,3 +1,4 @@
+# Create your models here.
 from django.db import models
 
 
@@ -18,11 +19,15 @@ class Seat(models.Model):
 
 class Order(models.Model):
     seat = models.ForeignKey(Seat, on_delete=models.CASCADE)
-    menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE, related_name='menu_item')
+    menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE, related_name='品項')
     quantity = models.IntegerField(help_text='數量')
     timestamp = models.DateTimeField(auto_now_add=True, help_text='時間戳記')
-    status = models.CharField(max_length=10, help_text='狀態')
-    price = models.ForeignKey(MenuItem, on_delete=models.CASCADE, related_name='price')
+    status = models.BooleanField(default=False, help_text='已出單')
+    
 
     def __str__(self):
         return self.menu_item.name
+    
+    @property
+    def price (self):
+        return self.menu_item.price * self.quantity
